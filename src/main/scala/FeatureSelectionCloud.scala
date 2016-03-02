@@ -48,7 +48,7 @@ object FeatureSelectionCloud {
 
 	val AWS_ACCESS_KEY = AWSKeyInformation.AWS_ACCESS_KEY
 	val AWS_SECRET_KEY = AWSKeyInformation.AWS_SECRET_KEY
-	val LOCAL = true;
+	val LOCAL = ProjectConfig.RUN_LOCALLY;
 
 	def main(args : Array[String]) : Unit = {
 
@@ -100,7 +100,7 @@ object FeatureSelectionCloud {
 
 		    //Example S3 results file bucket name: "virusdetection-results"
 		    //file path for storing results file
-		    val resultsBucketName = AWSBucketInformation.AWS_RESULT_BUCKET
+		    val resultsBucketName = AWSBucketInformation.AWS_RESULTS_BUCKET
 
 		/**
 		 * *
