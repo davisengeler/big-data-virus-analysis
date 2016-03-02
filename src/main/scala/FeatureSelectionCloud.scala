@@ -86,21 +86,21 @@ object FeatureSelectionCloud {
 		 * *
 		 */
 		    //val virusBucketName = "vd-virus-small"
-		    val virusBucketName = "virus-api"
+		    val virusBucketName = AWSBucketInformation.AWS_VIRUS_BUCKET
 
 		    /***
 		    Example S3 clean file bucket name: "virusdetection-clean"
 		    file path for source clean file hexdumps
 		    ***/
 		    //val cleanBucketName = "vd-clean-small"
-		    val cleanBucketName = "clean-api"
+		    val cleanBucketName = AWSBucketInformation.AWS_CLEAN_BUCKET
 
 		    //Number of features to be selected
 		    val featureNumber = 2000
 
 		    //Example S3 results file bucket name: "virusdetection-results"
 		    //file path for storing results file
-		    val resultsBucketName = "result-data"
+		    val resultsBucketName = AWSBucketInformation.AWS_RESULT_BUCKET
 
 		/**
 		 * *
