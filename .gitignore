@@ -18,4 +18,4 @@ project/plugins/project/
 .worksheet
 
 # For password files:
-aws-keys.scala
+aws-keys.*

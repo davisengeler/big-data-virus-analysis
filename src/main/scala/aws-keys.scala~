@@ -1,8 +1,0 @@
-package org.virus
-
-object AWSKeyInformation {
-	
-	val AWS_ACCESS_KEY = "AKIAJKMKYIGPFK5EET6Q"
-	val AWS_SECRET_KEY = "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"
-
-}
