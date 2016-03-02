@@ -19,3 +19,6 @@ checkpoint/
 
 # For password files:
 aws-keys.*
+
+# Ugly .something~ files
+*.*~
