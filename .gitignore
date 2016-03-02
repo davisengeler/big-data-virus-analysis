@@ -18,7 +18,7 @@ checkpoint/
 .worksheet
 
 # For password files:
-aws-keys.*
+config.scala*
 
 # Ugly .something~ files
 *.*~
