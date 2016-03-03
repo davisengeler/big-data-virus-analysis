@@ -22,3 +22,7 @@ config.scala*
 
 # Ugly .something~ files
 *.*~
+
+# Random things for this particular project
+/topFeatures.txt
+/LIBSVMOutput.txt
