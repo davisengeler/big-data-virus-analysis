@@ -107,8 +107,8 @@ object FeatureSelectionCloud {
     ***/
 
     // Creates features
-    val tempVirus = createByteFeatures(sc, virusBucketName)
-    val tempClean = createByteFeatures(sc, cleanBucketName)
+    val tempVirus = createAPIfeatures(sc, virusBucketName)
+    val tempClean = createAPIfeatures(sc, cleanBucketName)
 
     // use s3
     val vFileCount = getFileNames(virusBucketName).length.toDouble 
@@ -300,6 +300,31 @@ def createByteFeatures(sc: SparkContext, FilePath: String) : Array[RDD[String]] 
     tempArray
   }
 
+def createAPIfeatures(sc: SparkContext, FilePath: String) : Array[RDD[String]] = {
+
+  val fileNames = getFileNames(FilePath)      // Grab the API logs individually. Returns mutable list <String>.
+  var tempArray = new Array[RDD[String]](0)   // Preps a spot to hold our results
+
+  // Go through each log file and grab the unique features
+  for (file <- fileNames) {
+    val fileName = "s3://" + FilePath + "/" + file.toString
+    System.out.println(fileName)
+    val sourceRDD = sc.textFile(fileName)
+    val cleanRDD = sourceRDD.map(
+          _ replace(" ", "")
+            replace("+", "")
+            replace("-", "")
+        ).distinct.filter(_.nonEmpty)
+    tempArray = tempArray :+ cleanRDD
+  }
+
+  // Return our results
+  println("\n")
+  tempArray.foreach(_.foreach(println(_)))
+  println("\n")
+  tempArray
+}
+
 /***
 this function will calculate entropy to decide whether we use one feature to divide the tree. x is the number of the virus files for one feature, y is number of files (virus + clean files) y-x is the number of clean files 
 ***/
@@ -335,6 +360,7 @@ def countFeatures(sc: SparkContext, tempArray: Array[RDD[String]]) : RDD[(String
    ***/
 
    val combineFeatureRDD = sc.union(tempArray).map(x => (x,1)).reduceByKey(_ + _)
+   println("COUNT: " + combineFeatureRDD)
    combineFeatureRDD
 }
 
