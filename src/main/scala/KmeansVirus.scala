@@ -2,6 +2,8 @@
  * Created by jsmith on 10/14/15.
  */
 
+ package org.virus
+
 import org.apache.spark.mllib.clustering._
 import org.apache.spark.mllib.util.MLUtils
 import org.apache.spark.mllib.regression.LabeledPoint
@@ -9,7 +11,19 @@ import org.apache.spark.mllib.linalg._
 import org.apache.spark.rdd._
 import org.apache.spark.{SparkConf, SparkContext}
 
+import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.services.s3.AmazonS3Client
+import com.amazonaws.services.s3.model._
+import com.amazonaws.{ClientConfiguration, Protocol}
+
+
 object driver {
+
+  // Load configuration
+  val AWS_ACCESS_KEY = AWSKeyInformation.AWS_ACCESS_KEY
+  val AWS_SECRET_KEY = AWSKeyInformation.AWS_SECRET_KEY
+
+
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("selectedintrusion").setMaster("local")
     val sc = new SparkContext(conf)
@@ -19,12 +33,12 @@ object driver {
     //set SC configuration to use NativeS3FileSystem
     hadoopConf.set("fs.s3.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem")
     //set SC configuration with S3 credentials
-    hadoopConf.set("fs.s3.awsAccessKeyId", " ")
-    hadoopConf.set("fs.s3.awsSecretAccessKey", " ")
+    hadoopConf.set("fs.s3.awsAccessKeyId", AWS_ACCESS_KEY)
+    hadoopConf.set("fs.s3.awsSecretAccessKey", AWS_SECRET_KEY)
 
     //Example S3 virus file bucket name: "vscanner-mappings"
     //file path for LIBSVM formatted file
-    val virusBucketName = args(0)
+    val virusBucketName = AWSBucketInformation.AWS_VIRUS_BUCKET
 
     //Create LabeledPoint RDD from LIBSVM formatted file stored on S#
     val rawData:RDD[LabeledPoint] = MLUtils.loadLibSVMFile(sc, "s3://" + virusBucketName + "/mappings.txt")
