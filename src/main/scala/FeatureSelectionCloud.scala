@@ -119,7 +119,7 @@ object FeatureSelectionCloud {
 		val tempClean = createAPIfeatures(sc, cleanBucketName)
 
 		// use s3
-		/*val vFileCount = getFileNames(virusBucketName).length.toDouble
+		val vFileCount = getFileNames(virusBucketName).length.toDouble
 		val cFileCount = getFileNames(cleanBucketName).length.toDouble
 
 		// use locl
@@ -183,7 +183,7 @@ object FeatureSelectionCloud {
 		val fileToUpload2 = new File(file2)
 
 		//save the topfeature.txt to AWS
-		putFile(resultsBucketName, "LIBSVM.txt", fileToUpload2)*/
+		putFile(resultsBucketName, "LIBSVM.txt", fileToUpload2)
 	}
 
 	//function to write file to S3 bucket
@@ -339,9 +339,6 @@ object FeatureSelectionCloud {
 		}
 
 		// Return our results
-		println("\n")
-		tempArray.foreach(_.foreach(println(_)))
-		println("\n")
 		tempArray
 	}
 

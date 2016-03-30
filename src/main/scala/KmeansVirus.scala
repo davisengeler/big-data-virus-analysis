@@ -39,9 +39,10 @@ object driver {
     //Example S3 virus file bucket name: "vscanner-mappings"
     //file path for LIBSVM formatted file
     val virusBucketName = AWSBucketInformation.AWS_VIRUS_BUCKET
+    val resultsBucketName = AWSBucketInformation.AWS_RESULTS_BUCKET
 
     //Create LabeledPoint RDD from LIBSVM formatted file stored on S#
-    val rawData:RDD[LabeledPoint] = MLUtils.loadLibSVMFile(sc, "s3://" + virusBucketName + "/mappings.txt")
+    val rawData:RDD[LabeledPoint] = MLUtils.loadLibSVMFile(sc, "s3://" + resultsBucketName + "/LIBSVM.txt")
     //val rawData:RDD[LabeledPoint] = MLUtils.loadLibSVMFile(sc, "/home/jsmith/mappings.txt")
 
     //Convert LabeledPoint RDD to RDD of format (feature Label, Vector) to be used form computing best K value
@@ -59,7 +60,7 @@ object driver {
 
   def searchBestKWithUsingEntropy(rawData: RDD[(Double, Vector)]): Unit = {
 
-    (30 to 160 by 10).map{k =>
+    (5 to 100 by 5).map{k =>
       System.out.println("K is " + k)
       (k, costlyWeightedAveEntropyScore(rawData, k))}.toList.
       foreach(println)
