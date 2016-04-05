@@ -2,7 +2,7 @@
  * Created by jsmith on 10/14/15.
  */
 
- package org.virus
+package org.virus
 
 import org.apache.spark.mllib.clustering._
 import org.apache.spark.mllib.util.MLUtils
@@ -16,12 +16,22 @@ import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model._
 import com.amazonaws.{ClientConfiguration, Protocol}
 
+import org.apache.log4j.{ Level, Logger }
 
-object driver {
+import net.liftweb.json.JsonDSL._
+import net.liftweb.json._
+
+
+object Clustering {
 
   // Load configuration
   val AWS_ACCESS_KEY = AWSKeyInformation.AWS_ACCESS_KEY
   val AWS_SECRET_KEY = AWSKeyInformation.AWS_SECRET_KEY
+
+  // Log levels
+  Logger.getLogger("org").setLevel(Level.OFF)
+  Logger.getLogger("akka").setLevel(Level.OFF) 
+  //AdjustLogLevel.setStreamingLogLevels()
 
 
   def main(args: Array[String]): Unit = {
@@ -48,9 +58,13 @@ object driver {
     //Convert LabeledPoint RDD to RDD of format (feature Label, Vector) to be used form computing best K value
     val rawDataFeatures = rawData.map(x => (x.label, x.features))
 
-    //Call function to compute best K value
-    val bestK = searchBestKWithUsingEntropy(rawDataFeatures)
 
+    // Get the clustering structure
+    buildClustering(rawDataFeatures, 10)
+
+    // Build the information in JSON formatting
+    // val json = ("name" -> "main-container"
+    //   "children" -> )
 
 
 
@@ -62,48 +76,30 @@ object driver {
 
     (5 to 100 by 5).map{k =>
       System.out.println("K is " + k)
-      (k, costlyWeightedAveEntropyScore(rawData, k))}.toList.
+      (k, buildClustering(rawData, k))}.toList.
       foreach(println)
 
   }//end of searchBestKWithUsingEntropy function
 
 
-  //weighted average of entropy can be used as a cluster score
-  //input of this function will RDD. Each element of RDD is label and normalized data
-  //return Double value
-  def costlyWeightedAveEntropyScore(normalizedLabelsAndData: RDD[(Double,Vector)],
-                                    k: Int) = {
+  // Builds a collection of clusters based on the KMeans predictions.
+  def buildClustering(normalizedLabelsAndData: RDD[(Double,Vector)], k: Int): RDD[(Int, Iterable[Double])] = {
+    
+    // Set up initial KMeans stuff
     val kmeans = new KMeans()
     kmeans.setK(k)
     kmeans.setRuns(10)
     kmeans.setEpsilon(1.0e-6)
-    val test = normalizedLabelsAndData.collect()
+
+    // TODO: Not sure what this is really doing. Magic?
     val model = kmeans.run(normalizedLabelsAndData.values)
-    // Predict cluster for each datum
-    // rdd.RDD[(String, Int)]  each element is the label and cluster num
-    //  it belongs to
-    val labelsAndClusters = normalizedLabelsAndData.mapValues(model.predict)
-    // Swap keys / values
-    //rdd.RDD[(Int, String)]
-    //lable is 23 type of attacks or normal
-    val clustersAndLabels = labelsAndClusters.map(_.swap)
-    // Extract collections of labels, per cluster
-    // Key is cluster ID
-    // rdd.RDD[Iterable[String]]
-    //each element is all labels for one cluster
-    val labelsInCluster = clustersAndLabels.groupByKey().values
-    // Count labels in collections
-    //RDD[scala.collection.immutable.Iterable[Int]]
-    //each element is total count of each label for each cluster
-    val labelCounts = labelsInCluster.map(_.groupBy(l => l).map(_._2.size))
-    //n: Long = 494021
-    // total sample size
-    val n = normalizedLabelsAndData.count()
-    // Average entropy weighted by cluster size
-    //m is total count for each label for one cluster
-    //entropy(m) calcuate entropy for one cluster
-    labelCounts.map(m => m.sum * entropy(m)).sum / n
-  }//end of costlyWeightedAveEntropyScore
+    
+    // Map the sample to the predictions (the cluster number for that sample).
+    // Swap the keys and values (so the cluster ID points to the sample).
+    // Returns the resulting RDD[(Int, Iterable[Double])]  NOTE: "Iterable" ends up being a CompactBuffer
+    normalizedLabelsAndData.mapValues(model.predict).map(_.swap).groupByKey
+
+  }//end of buildClustering
 
   ///////////////////////////////
   //Using Labels with Entropy//
