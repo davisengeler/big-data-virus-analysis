@@ -60,12 +60,16 @@ object Clustering {
 
 
     // Get the clustering structure
-    buildClustering(rawDataFeatures, 10)
+    val rawClusterInfo = buildClustering(rawDataFeatures, 10)
 
-    // Build the information in JSON formatting
-    // val json = ("name" -> "main-container"
-    //   "children" -> )
-
+    // For prepping the JSON:
+    //
+    // 3 - API Calls (most basic):      ("name","whateverID") ~ ("size",whateverSize)
+    // 2 - Clean or virus in cluster:   ("name","cleanOrVirus") ~ ("children",collectionOfChildren)
+    // 1 - Clusters in main group:      ("name","clusterName") ~ ("children",collectionOfVirusOrClean)
+    // 0 - Main cluster:                ("name","main-cluster") ~ ("children",collectionOfClusters)
+    // 
+    // Final result:                    println(compact(render( 0 ~ 1 ~ 2 ~ 3 )))
 
 
     sc.stop()
@@ -83,7 +87,7 @@ object Clustering {
 
 
   // Builds a collection of clusters based on the KMeans predictions.
-  def buildClustering(normalizedLabelsAndData: RDD[(Double,Vector)], k: Int): RDD[(Int, Iterable[Double])] = {
+  def buildClustering(normalizedLabelsAndData: RDD[(Double,Vector)], k: Int): RDD[(Int, Double)] = {
     
     // Set up initial KMeans stuff
     val kmeans = new KMeans()
@@ -97,7 +101,7 @@ object Clustering {
     // Map the sample to the predictions (the cluster number for that sample).
     // Swap the keys and values (so the cluster ID points to the sample).
     // Returns the resulting RDD[(Int, Iterable[Double])]  NOTE: "Iterable" ends up being a CompactBuffer
-    normalizedLabelsAndData.mapValues(model.predict).map(_.swap).groupByKey
+    normalizedLabelsAndData.mapValues(model.predict).map(_.swap)
 
   }//end of buildClustering
 
