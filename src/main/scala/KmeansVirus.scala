@@ -53,11 +53,10 @@ object Clustering {
 
     //Create LabeledPoint RDD from LIBSVM formatted file stored on S#
     val rawData:RDD[LabeledPoint] = MLUtils.loadLibSVMFile(sc, "s3://" + resultsBucketName + "/LIBSVM.txt")
-    //val rawData:RDD[LabeledPoint] = MLUtils.loadLibSVMFile(sc, "/home/jsmith/mappings.txt")
+    rawData.cache
 
     //Convert LabeledPoint RDD to RDD of format (feature Label, Vector) to be used form computing best K value
     val rawDataFeatures = rawData.map(x => (x.label, x.features))
-
 
     // Get the clustering structure
     val rawClusterInfo = buildClustering(rawDataFeatures, 10)
@@ -71,11 +70,13 @@ object Clustering {
     // 
     // Final result:                    println(compact(render( 0 ~ 1 ~ 2 ~ 3 )))
 
+    rawClusterInfo.foreach(println)
 
     sc.stop()
-
   }
 
+  // This doesn't return the best K, but instead only prints the results by 5
+  // Requires furthor research https://en.wikipedia.org/wiki/Determining_the_number_of_clusters_in_a_data_set
   def searchBestKWithUsingEntropy(rawData: RDD[(Double, Vector)]): Unit = {
 
     (5 to 100 by 5).map{k =>
@@ -83,8 +84,7 @@ object Clustering {
       (k, buildClustering(rawData, k))}.toList.
       foreach(println)
 
-  }//end of searchBestKWithUsingEntropy function
-
+  }
 
   // Builds a collection of clusters based on the KMeans predictions.
   def buildClustering(normalizedLabelsAndData: RDD[(Double,Vector)], k: Int): RDD[(Int, Double)] = {
@@ -95,20 +95,17 @@ object Clustering {
     kmeans.setRuns(10)
     kmeans.setEpsilon(1.0e-6)
 
-    // TODO: Not sure what this is really doing. Magic?
+    // Train a K-means model on the given set of points; data should be cached for high performance, because this is an iterative algorithm.
     val model = kmeans.run(normalizedLabelsAndData.values)
     
     // Map the sample to the predictions (the cluster number for that sample).
     // Swap the keys and values (so the cluster ID points to the sample).
-    // Returns the resulting RDD[(Int, Iterable[Double])]  NOTE: "Iterable" ends up being a CompactBuffer
+    // Returns the resulting RDD[(Int, Double)]
     normalizedLabelsAndData.mapValues(model.predict).map(_.swap)
 
-  }//end of buildClustering
+  }
 
-  ///////////////////////////////
-  //Using Labels with Entropy//
-  ///////////////////////////////
-  //entropy: (counts: Iterable[Int])  Double
+  //Using Labels with Entropy
   def entropy(counts: Iterable[Int]) = {
     val values = counts.filter(_ > 0)
     val n: Double = values.sum
@@ -116,5 +113,5 @@ object Clustering {
       val p = v / n
       -p * math.log(p)
     }.sum
-  }//end of entropy function
+  }
 }
