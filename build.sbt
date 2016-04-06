@@ -16,7 +16,6 @@ libraryDependencies ++= Seq(
 	"org.apache.spark" %% "spark-mllib" % "1.4.1",
   	"net.liftweb" %% "lift-json" % "2.5",
   	"net.liftweb" %% "lift-webkit" % "2.5",
-  	"com.amazonaws" % "aws-java-sdk" % "1.0.002",
   	"io.keen" %% "keenclient-scala" % "0.5.0"
 )
 
