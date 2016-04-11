@@ -4,6 +4,8 @@
 
 package org.virus
 
+import java.io._
+
 import org.apache.spark.mllib.clustering._
 import org.apache.spark.mllib.util.MLUtils
 import org.apache.spark.mllib.regression.LabeledPoint
@@ -46,6 +48,9 @@ object Clustering {
     hadoopConf.set("fs.s3.awsAccessKeyId", AWS_ACCESS_KEY)
     hadoopConf.set("fs.s3.awsSecretAccessKey", AWS_SECRET_KEY)
 
+    val myAWSCredentials = new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY)
+    val amazonS3Client = new AmazonS3Client(myAWSCredentials)
+
     //Example S3 virus file bucket name: "vscanner-mappings"
     //file path for LIBSVM formatted file
     val virusBucketName = AWSBucketInformation.AWS_VIRUS_BUCKET
@@ -70,7 +75,18 @@ object Clustering {
     // 
     // Final result:                    println(compact(render( 0 ~ 1 ~ 2 ~ 3 )))
 
-    rawClusterInfo.foreach(println)
+    //rawClusterInfo.foreach(println)
+
+    val fileToUpload = new File("output.txt")
+    val bw = new BufferedWriter(new FileWriter(fileToUpload))
+
+    rawClusterInfo.toArray.foreach(x => { bw.write(x._1 + "," + x._2 + "\n") })
+    bw.close()
+
+    val putObjectRequest = new PutObjectRequest(AWSBucketInformation.AWS_RESULTS_BUCKET, "output.txt", fileToUpload)
+    val acl = CannedAccessControlList.PublicRead
+    putObjectRequest.setCannedAcl(acl)
+    amazonS3Client.putObject(putObjectRequest)
 
     sc.stop()
   }
