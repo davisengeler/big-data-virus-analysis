@@ -27,12 +27,12 @@
 			$clusterID = intval($apiInfo[0]);
 			$apiType = intval($apiInfo[1]);
 
-			$clusters[$clusterID]["children"][$apiType]["children"][] = Array("name"=>"API Call", "size"=>100);
+			$clusters[$clusterID]["children"][$apiType]["children"][] = Array("name"=>"API Call", "size"=>100); // TODO: We need to calculate the size somehow.
 		}
 	}
 
 	// Load up the main container
-	$mainContainer = Array("name"=>"Main Container", "children"=>array_values($clusters));
+	$mainContainer = Array("name"=>"Main Container", "children"=>$clusters);
 
 	// Output to file
 	$outputFile = fopen("www/html/data.json", "w");
