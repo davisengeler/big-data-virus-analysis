@@ -399,13 +399,11 @@ object FeatureSelectionCloud {
 	}
 
 	/**
-	 * *
 	 * v the number of virus files
 	 * t the number of virus + clean files
 	 * fNumber the number of selected features
 	 * This method will compute information gain for each feature. Sort the feature based on
 	 * information Gain and select the top feature
-	 * *
 	 */
 	def featureSelectionByInfoGain(sc : SparkContext, v : Double, t : Double, fNumber : Int,
 		virusRDD : RDD[(String, Int)], cleanRDD : RDD[(String, Int)]) : Array[(String, Double)] = {
@@ -491,8 +489,8 @@ object FeatureSelectionCloud {
 	}
 
 	/*
-  lookup features from topFeatures file and save the results to file for to read in later.
-  */
+  	lookup features from topFeatures file and save the results to file for to read in later.
+  	*/
 	def doesFeatureExist(tempRDD : RDD[String], featureRDD : RDD[String]) : Array[Long] = {
 
 		// x = feature
@@ -507,14 +505,14 @@ object FeatureSelectionCloud {
 		val indexedRDD = joinedRDD.zipWithIndex().map { case (k, v) => (v, k) }
 
 		/*Create RDD that contains only features that existed in both the tempData and featureRDD data sets.
-       *  Returned RDD contains feature Index value and a 1.
-       *  Example results - (33,1)
-       *  .filter is based on the elements matching the "=> a == Some(1)" condition.  Only feature elements that were found to
-       *  exist in both the tempDataRDD and the featureRDD will test true and be included in the filteredRDD.
-       *  The matching elements are then converted to a format of (index + 1, 1)
-       *  --index + 1 is required to convert the index to a 1's based index due to the fact that when the data is
-       *  read back in by the MLUtils.loadLibSVMFile API in future steps the index automatically reduced by 1.
-        */
+	       *  Returned RDD contains feature Index value and a 1.
+	       *  Example results - (33,1)
+	       *  .filter is based on the elements matching the "=> a == Some(1)" condition.  Only feature elements that were found to
+	       *  exist in both the tempDataRDD and the featureRDD will test true and be included in the filteredRDD.
+	       *  The matching elements are then converted to a format of (index + 1, 1)
+	       *  --index + 1 is required to convert the index to a 1's based index due to the fact that when the data is
+	       *  read back in by the MLUtils.loadLibSVMFile API in future steps the index automatically reduced by 1.
+		*/
 
 		val filteredRDD = indexedRDD.filter { case (x : Long, (y : String, (z : Int, a : Option[Int]))) => a == Some(1) }.map { case (x : Long, (y : String, (z : Int, a : Option[Int]))) => (x + 1) }
 		filteredRDD.collect()
