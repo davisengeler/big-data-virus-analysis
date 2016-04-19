@@ -2,7 +2,7 @@
 
 	// TODO: This should work seamlessly when changing the number of clusters. 
 	//       This technique should be changed to work well with the others.
-	$numberOfClusters = 10;
+	$numberOfClusters = 3;
 
 	$rawClusteringInfo = explode("\n", file_get_contents("output.txt"));
 
@@ -12,11 +12,11 @@
 	{
 		$apiCallsClean = Array();
 		$apiCallsVirus = Array();
-		$clusters[$i]["name"] = "Cluster";
-		$cleanSamples = Array("name"=>"CleanSample", "children"=>$apiCallsClean);
-		$virusSamples = Array("name"=>"VirusSample", "children"=>$apiCallsVirus);
-		$cleanCluster = Array("name"=>"Clean", "children"=>$cleanSamples);
-		$virusCluster = Array("name"=>"Virus", "children"=>$virusSamples);
+		$clusters[$i]["name"] = "Cluster #" . ($i+1);
+			$cleanSamples = Array("name"=>"CleanSample", "children"=>$apiCallsClean);
+			$virusSamples = Array("name"=>"VirusSample", "children"=>$apiCallsVirus);
+		$cleanCluster = Array("name"=>"Clean");
+		$virusCluster = Array("name"=>"Virus");
 		$clusters[$i]["children"] = Array($cleanCluster, $virusCluster);
 	}
 
@@ -25,7 +25,7 @@
 	{
 		if (strcmp($currentSample, "") != 0) {
 			$sampleInfo = explode(';', $currentSample);  // each one looks like "id,type"
-			$clusterID = intval($sampleInfo[0]);
+			$clusterID = intval($sampleInfo[0]) - 1;
 			$sampleType = intval($sampleInfo[1]);
 			$apiCalls = json_decode($sampleInfo[2]);
 
@@ -38,12 +38,19 @@
 	}
 
 	// Load up the main container
-	$mainContainer = Array("name"=>"Main Container", "children"=>$clusters);
+	$mainContainer = Array("name"=>"Main Container", "children"=>array_values($clusters));
 
 	// Output to file
 	$outputFile = fopen("www/html/data.json", "w");
+
+
+	
+
+
 	fwrite($outputFile, json_encode($mainContainer));
 
 	echo json_encode($mainContainer);
+
+
 	
 ?>
