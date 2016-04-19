@@ -5,29 +5,35 @@
 	$numberOfClusters = 10;
 
 	$rawClusteringInfo = explode("\n", file_get_contents("output.txt"));
-	print_r($rawClusteringInfo);
 
 	// Set up the clusters
 	$clusters = Array();
 	for ($i = 0; $i < $numberOfClusters; $i++)
 	{
+		$apiCallsClean = Array();
+		$apiCallsVirus = Array();
 		$clusters[$i]["name"] = "Cluster";
-		$cleanAPIs = Array();
-		$virusAPIs = Array();
-		$cleanCluster = Array("name"=>"Clean", "children"=>$cleanAPIs);
-		$virusCluster = Array("name"=>"Virus", "children"=>$virusAPIs);
+		$cleanSamples = Array("name"=>"CleanSample", "children"=>$apiCallsClean);
+		$virusSamples = Array("name"=>"VirusSample", "children"=>$apiCallsVirus);
+		$cleanCluster = Array("name"=>"Clean", "children"=>$cleanSamples);
+		$virusCluster = Array("name"=>"Virus", "children"=>$virusSamples);
 		$clusters[$i]["children"] = Array($cleanCluster, $virusCluster);
 	}
 
 	// Load up the clusters
-	foreach($rawClusteringInfo as $apiCall) 
+	foreach($rawClusteringInfo as $currentSample) 
 	{
-		if (strcmp($apiCall, "") != 0) {
-			$apiInfo = explode(',', $apiCall);  // each one looks like "id,type"
-			$clusterID = intval($apiInfo[0]);
-			$apiType = intval($apiInfo[1]);
+		if (strcmp($currentSample, "") != 0) {
+			$sampleInfo = explode(';', $currentSample);  // each one looks like "id,type"
+			$clusterID = intval($sampleInfo[0]);
+			$sampleType = intval($sampleInfo[1]);
+			$apiCalls = json_decode($sampleInfo[2]);
 
-			$clusters[$clusterID]["children"][$apiType]["children"][] = Array("name"=>"API Call", "size"=>100); // TODO: We need to calculate the size somehow.
+			echo "\n\n\n";
+
+			print_r($apiCalls);
+
+			$clusters[$clusterID]["children"][$sampleType]["children"][] = Array("name"=>"Sample", "children"=>$apiCalls); // TODO: We need to calculate the size somehow.
 		}
 	}
 
@@ -37,5 +43,7 @@
 	// Output to file
 	$outputFile = fopen("www/html/data.json", "w");
 	fwrite($outputFile, json_encode($mainContainer));
+
+	echo json_encode($mainContainer);
 	
 ?>
