@@ -2,7 +2,7 @@
 
 	// TODO: This should work seamlessly when changing the number of clusters. 
 	//       This technique should be changed to work well with the others.
-	$numberOfClusters = 3;
+	$numberOfClusters = 10;
 
 	$rawClusteringInfo = explode("\n", file_get_contents("output.txt"));
 
@@ -25,7 +25,7 @@
 	{
 		if (strcmp($currentSample, "") != 0) {
 			$sampleInfo = explode(';', $currentSample);  // each one looks like "id,type"
-			$clusterID = intval($sampleInfo[0]) - 1;
+			$clusterID = intval($sampleInfo[0]);
 			$sampleType = intval($sampleInfo[1]);
 			$apiCalls = json_decode($sampleInfo[2]);
 
