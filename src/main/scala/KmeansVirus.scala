@@ -104,11 +104,11 @@ object Clustering {
 		println("Mapping indices to feature names...")
 		// Maps the indices to the corresponding name
 		val featureIndicesNames: RDD[Array[String]] = featureIndicesNumbers.map(indices => 
-			indices.map(index => "\"" + featureNames(index) + "\": " 
+			indices.map(index => "{\"name\": \"" + featureNames(index) + "\", \"size\": " 
 					// Get the features occurrence and display it in descending order (n to 1)
 					// This way we can use this as a "rank" to display how big the size of the API cluster
 					// inside of D3 should be, this will show how common it is compared to all the other API's
-					+ (totalFeatures - index))) 
+					+ (totalFeatures - index) + "}")) 
 		//featureIndicesNames.foreach { x => println(x.mkString(",")) }
 		
 		// Convert LabeledPoint RDD to RDD of format (feature Label, Vector) to be used for computing best K value
@@ -121,7 +121,7 @@ object Clustering {
 		println("Formatting predictions, labels, and features...")
 		// Format the data into an RDD tuple3 of (ClusterNumber: Int, Label: Double, APIJsonData: String)
 		val formatedClusterInfo: RDD[(Int, Double, String)] = (rawClusterInfo zip featureIndicesNames).map { 
-			case (a, b) => (a._1, a._2, "{[" + b.mkString(",") + "]}") 
+			case (a, b) => (a._1, a._2, "[" + b.mkString(",") + "]") 
 		}
 		//formatedClusterInfo.foreach(x => println(x._1 + "," + x._2 + "," + x._3))
 		
@@ -132,7 +132,7 @@ object Clustering {
 		
 		// We must change formatedClusterInfo to an array from an RDD because the BufferedWriter is not serializable,
 		// therefore we must iterate through the array on the master node to print out the results
-		formatedClusterInfo.toArray.foreach(x => { bw.write(x._1 + "," + x._2 + "," + x._3 + "\n") })
+		formatedClusterInfo.toArray.foreach(x => { bw.write(x._1 + ";" + x._2 + ";" + x._3 + "\n") })
 		bw.close()
 		
 		println("Uploading output.txt to S3...")
