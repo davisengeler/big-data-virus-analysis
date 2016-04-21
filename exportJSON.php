@@ -4,6 +4,8 @@
 	//       This technique should be changed to work well with the others.
 	$numberOfClusters = 10;
 
+	$totalCount = 0;
+
 	$rawClusteringInfo = explode("\n", file_get_contents("output.txt"));
 
 	// Set up the clusters
@@ -33,6 +35,8 @@
 
 			print_r($apiCalls);
 
+			$totalCount += sizeof($apiCalls);
+
 			$clusters[$clusterID]["children"][$sampleType]["children"][] = Array("name"=>"Sample", "children"=>$apiCalls); // TODO: We need to calculate the size somehow.
 		}
 	}
@@ -50,6 +54,8 @@
 	fwrite($outputFile, json_encode($mainContainer));
 
 	echo json_encode($mainContainer);
+
+	echo "\n\nCOUNT: " . $totalCount;
 
 
 	
