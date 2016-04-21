@@ -1,0 +1,12 @@
+ +
+QuerySystemInformation +
+QuerySystemInformation +
+QueryProcessInformation +
+GetForegroundWindow +
+CreateToolhelp32Snapshot +
+VirtualAllocEx +
+QuerySystemInformation +
+OpenProcessToken +
+CreateProcess +
+VirtualAllocEx +
+VirtualAllocEx +

@@ -1,0 +1,17 @@
+ +
+QuerySystemInformation +
+QuerySystemInformation +
+QueryProcessInformation +
+VirtualAllocEx +
+VirtualAllocEx +
+LoadLibrary +
+QueryProcessInformation +
+FreeLibrary +
+VirtualAllocEx +
+OpenProcessToken +
+VirtualAllocEx +
+VirtualAllocEx +
+QueryProcessInformation +
+VirtualAllocEx +
+Sleep +
+Sleep +

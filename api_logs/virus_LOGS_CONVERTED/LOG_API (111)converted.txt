@@ -1,0 +1,6 @@
+ +
+QuerySystemInformation +
+QuerySystemInformation +
+QueryProcessInformation +
+GetProcessDEPPolicy +
+VirtualAllocEx +

@@ -1,0 +1,16 @@
+ +
+QuerySystemInformation +
+QuerySystemInformation +
+QueryProcessInformation +
+Sleep +
+VirtualAllocEx +
+VirtualAllocEx +
+VirtualAllocEx +
+VirtualAllocEx +
+GetModuleHandle +
+LoadLibrary +
+GetModuleHandle +
+LoadLibrary +
+GetModuleHandle +
+LoadLibrary +
+Sleep +

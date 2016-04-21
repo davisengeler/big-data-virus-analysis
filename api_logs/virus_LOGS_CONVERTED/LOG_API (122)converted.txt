@@ -1,0 +1,11 @@
+ +
+QuerySystemInformation +
+QuerySystemInformation +
+QueryProcessInformation +
+QueryProcessInformation +
+VirtualAllocEx +
+VirtualAllocEx +
+OpenProcessToken +
+OpenProcess +
+FindWindow +
+GetAsyncKeyState +

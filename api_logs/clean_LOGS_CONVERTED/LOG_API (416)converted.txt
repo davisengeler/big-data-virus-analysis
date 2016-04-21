@@ -1,0 +1,13 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+QueryProcessInformation -
+QueryProcessInformation -
+LoadLibrary -
+FreeLibrary -
+OpenProcessToken -
+VirtualAllocEx -
+CreateThread -
+ResumeThread -
+Sleep -

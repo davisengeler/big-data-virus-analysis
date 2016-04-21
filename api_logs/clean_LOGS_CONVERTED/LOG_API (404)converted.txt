@@ -1,0 +1,12 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+VirtualAllocEx -
+VirtualAllocEx -
+GetModuleHandle -
+QueryProcessInformation -
+GetModuleHandle -
+ExitProcess -
+FreeLibrary -
+TerminateProcess -

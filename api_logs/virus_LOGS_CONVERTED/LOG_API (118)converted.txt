@@ -1,0 +1,10 @@
+ +
+QuerySystemInformation +
+QuerySystemInformation +
+QueryProcessInformation +
+GetProcessDEPPolicy +
+VirtualAllocEx +
+CheckRemoteDebuggerPresent +
+QueryProcessInformation +
+VirtualAllocEx +
+TerminateProcess +

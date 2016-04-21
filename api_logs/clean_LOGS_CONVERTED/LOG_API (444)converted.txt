@@ -1,0 +1,15 @@
+Executing: C:\Users\leesteele\Downloads\clean\clean\GoogleUpdate  -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+VirtualAllocEx -
+VirtualAllocEx -
+QueryProcessInformation -
+VirtualAllocEx -
+VirtualAllocEx -
+LoadLibrary -
+LoadLibrary -
+QueryProcessInformation -
+ExitProcess -
+FreeLibrary -
+TerminateProcess -

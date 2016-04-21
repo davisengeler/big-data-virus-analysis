@@ -1,0 +1,10 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+QueryProcessInformation -
+FreeLibrary -
+GetModuleHandle -
+ExitProcess -
+FreeLibrary -
+TerminateProcess -

@@ -1,0 +1,11 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+VirtualAllocEx -
+VirtualAllocEx -
+QueryProcessInformation -
+CreateThread -
+ResumeThread -
+ResumeThread -
+Sleep -
