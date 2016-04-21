@@ -69,3 +69,17 @@ clusterNumber;labelType;{["apiName":size,"apiName":size,...]}
 #### Converting output.txt to JSON for D3 visualization
 
 Use `/exportJSON.php` to prepare the content of `/output.txt` to be visualized via D3. The script is set up to organize to satisfy the structure for the open source [Zoomable Circle Packing](https://bl.ocks.org/mbostock/7607535) cluster visualization.
+
+================
+
+#### Classification
+
+Determines the ROC curve and area under ROC curve (AUC) to predict the accuracy of the cluster classifcation. Sample output:
+
+```
+0.001 L2 regularization parameter, AUC = 74.761537%
+0.01 L2 regularization parameter, AUC = 72.390801%
+0.1 L2 regularization parameter, AUC = 69.726810%
+1.0 L2 regularization parameter, AUC = 64.863405%
+10.0 L2 regularization parameter, AUC = 50.239234%
+```
