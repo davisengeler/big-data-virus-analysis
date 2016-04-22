@@ -44,19 +44,15 @@ clusterNumber;labelType;{["apiName":size,"apiName":size,...]}
 ...
 ```
 
-- `clusterNumber`:
+Where each component is defined by:
 
-  The cluster index determined by k-means `predict` function.
+- `clusterNumber`: The cluster index determined by k-means `predict` function.
 
-- `labelType`:
+- `labelType`: `1.0` for viruses; `0.0` for clean.
 
-  `1.0` for viruses; `0.0` for clean.
+- `{["apiName":size,"apiName":size,...]}`: JSON-ecoded array of API call titles; `size` is the API's ranking in the top features (in descending order).
 
-- `{["apiName":size,"apiName":size,...]}`:
-
-  JSON-ecoded array of API call titles; `size` is the API's ranking in the top features (in descending order).
-
-###### Example:
+###### Example output:
 
 ```
 4;1.0;[{"name": "SuspendThread", "size": 59},{"name": "CreatePipe", "size": 36},{"name": "DeleteService", "size": 28},{"name": "ResumeThread", "size": 21},{"name": "SetWindowPos", "size": 17}]
@@ -69,3 +65,24 @@ clusterNumber;labelType;{["apiName":size,"apiName":size,...]}
 #### Converting output.txt to JSON for D3 visualization
 
 Use `/exportJSON.php` to prepare the content of `/output.txt` to be visualized via D3. The script is set up to organize to satisfy the structure for the open source [Zoomable Circle Packing](https://bl.ocks.org/mbostock/7607535) cluster visualization.
+
+<<<<<<< HEAD
+###### Example usage:
+
+```
+> php exportJSON.php
+=======
+================
+
+#### Classification
+
+Determines the ROC curve and area under ROC curve (AUC) to predict the accuracy of the cluster classifcation. Sample output:
+
+```
+0.001 L2 regularization parameter, AUC = 74.761537%
+0.01 L2 regularization parameter, AUC = 72.390801%
+0.1 L2 regularization parameter, AUC = 69.726810%
+1.0 L2 regularization parameter, AUC = 64.863405%
+10.0 L2 regularization parameter, AUC = 50.239234%
+>>>>>>> origin/master
+```
