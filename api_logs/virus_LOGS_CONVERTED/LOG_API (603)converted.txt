@@ -1,0 +1,14 @@
+ +
+QuerySystemInformation +
+QuerySystemInformation +
+QueryProcessInformation +
+QueryProcessInformation +
+VirtualAllocEx +
+LoadLibrary +
+GetModuleHandle +
+LoadLibrary +
+VirtualAllocEx +
+VirtualAllocEx +
+GetModuleHandle +
+GetModuleHandle +
+LoadLibrary +

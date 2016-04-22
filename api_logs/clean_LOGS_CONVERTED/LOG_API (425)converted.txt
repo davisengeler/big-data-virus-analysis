@@ -1,0 +1,12 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+VirtualAllocEx -
+QueryProcessInformation -
+LoadLibrary -
+OpenProcessToken -
+ExitProcess -
+FreeLibrary -
+VirtualAllocEx -
+TerminateProcess -

@@ -1,0 +1,16 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+GetProcessDEPPolicy -
+VirtualAllocEx -
+VirtualAllocEx -
+GetModuleHandle -
+LoadLibrary -
+GetModuleHandle -
+LoadLibrary -
+GetModuleHandle -
+LoadLibrary -
+LoadLibrary -
+Sleep -
+OutputDebugString -

@@ -1,0 +1,12 @@
+ +
+QuerySystemInformation +
+QuerySystemInformation +
+QueryProcessInformation +
+LoadLibrary +
+LoadLibrary +
+LoadLibrary +
+VirtualAllocEx +
+VirtualAllocEx +
+VirtualAllocEx +
+GetProcessDEPPolicy +
+Sleep +

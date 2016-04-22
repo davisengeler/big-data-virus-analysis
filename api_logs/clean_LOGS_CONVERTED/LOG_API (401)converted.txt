@@ -1,0 +1,11 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+QueryProcessInformation -
+VirtualAllocEx -
+LdrFindEntryForAddress -
+ExitProcess -
+FreeLibrary -
+VirtualAllocEx -
+TerminateProcess -

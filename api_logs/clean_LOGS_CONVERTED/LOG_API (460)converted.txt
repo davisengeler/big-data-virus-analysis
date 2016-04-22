@@ -1,0 +1,14 @@
+Executing: C:\Users\leesteele\Downloads\clean\clean\30.0.1599.101_30.0.1599.69_chrome_updater  -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+VirtualAllocEx -
+DeleteFile -
+CreateFile -
+CreateFile -
+DeleteFile -
+DeleteFile -
+ExitProcess -
+FreeLibrary -
+QueryProcessInformation -
+TerminateProcess -

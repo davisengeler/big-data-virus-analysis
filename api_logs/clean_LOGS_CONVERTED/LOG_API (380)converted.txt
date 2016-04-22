@@ -1,0 +1,7 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+QueryProcessInformation -
+VirtualAllocEx -
+QueryProcessInformation -

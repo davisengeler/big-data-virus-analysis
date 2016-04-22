@@ -1,0 +1,8 @@
+ +
+QuerySystemInformation +
+QuerySystemInformation +
+QueryProcessInformation +
+GetProcessDEPPolicy +
+LoadLibrary +
+Sleep +
+OutputDebugString +

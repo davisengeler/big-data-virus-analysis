@@ -44,7 +44,7 @@ clusterNumber;labelType;{["apiName":size,"apiName":size,...]}
 ...
 ```
 
-Where each component is defined by:
+*Where each component of the lines are defined to be:*
 
 - `clusterNumber`: The cluster index determined by k-means `predict` function.
 
@@ -66,12 +66,8 @@ Where each component is defined by:
 
 Use `/exportJSON.php` to prepare the content of `/output.txt` to be visualized via D3. The script is set up to organize to satisfy the structure for the open source [Zoomable Circle Packing](https://bl.ocks.org/mbostock/7607535) cluster visualization.
 
-<<<<<<< HEAD
-###### Example usage:
+###### Example usage: `php exportJSON.php`
 
-```
-> php exportJSON.php
-=======
 ================
 
 #### Classification
@@ -84,5 +80,4 @@ Determines the ROC curve and area under ROC curve (AUC) to predict the accuracy 
 0.1 L2 regularization parameter, AUC = 69.726810%
 1.0 L2 regularization parameter, AUC = 64.863405%
 10.0 L2 regularization parameter, AUC = 50.239234%
->>>>>>> origin/master
 ```

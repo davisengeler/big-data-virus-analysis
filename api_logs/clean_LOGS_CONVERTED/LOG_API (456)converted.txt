@@ -1,0 +1,14 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+VirtualAllocEx -
+DeleteFile -
+CreateFile -
+CreateFile -
+DeleteFile -
+DeleteFile -
+ExitProcess -
+FreeLibrary -
+QueryProcessInformation -
+TerminateProcess -

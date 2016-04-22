@@ -1,0 +1,14 @@
+Executing: C:\Users\leesteele\Downloads\clean\clean\33.0.1750.146_33.0.1750.117_chrome_updater  -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+VirtualAllocEx -
+DeleteFile -
+CreateFile -
+CreateFile -
+DeleteFile -
+DeleteFile -
+ExitProcess -
+FreeLibrary -
+QueryProcessInformation -
+TerminateProcess -

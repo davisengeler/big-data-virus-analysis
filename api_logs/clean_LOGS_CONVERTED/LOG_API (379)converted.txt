@@ -1,0 +1,8 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+QueryProcessInformation -
+ExitProcess -
+FreeLibrary -
+TerminateProcess -

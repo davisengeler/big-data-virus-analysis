@@ -1,0 +1,16 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+QueryProcessInformation -
+OpenProcessToken -
+VirtualAllocEx -
+VirtualAllocEx -
+QuerySystemInformation -
+QueryProcessInformation -
+QueryProcessInformation -
+VirtualAllocEx -
+ResumeThread -
+QueryProcessInformation -
+LdrFindEntryForAddress -
+TerminateProcess -

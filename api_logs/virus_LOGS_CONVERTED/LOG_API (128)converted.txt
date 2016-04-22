@@ -1,0 +1,17 @@
+ +
+QuerySystemInformation +
+QuerySystemInformation +
+QueryProcessInformation +
+VirtualAllocEx +
+GetProcessDEPPolicy +
+VirtualAllocEx +
+IsDebuggerPresent +
+CheckRemoteDebuggerPresent +
+FindWindow +
+GetForegroundWindow +
+VirtualAllocEx +
+VirtualAllocEx +
+VirtualAllocEx +
+FreeLibrary +
+QueryProcessInformation +
+TerminateProcess +

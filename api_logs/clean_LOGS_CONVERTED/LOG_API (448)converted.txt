@@ -1,0 +1,15 @@
+ -
+QuerySystemInformation -
+QuerySystemInformation -
+QueryProcessInformation -
+VirtualAllocEx -
+VirtualAllocEx -
+GetModuleHandle -
+QueryProcessInformation -
+OpenSCManager -
+OpenService -
+GetModuleHandle -
+ExitProcess -
+FreeLibrary -
+VirtualAllocEx -
+TerminateProcess -
