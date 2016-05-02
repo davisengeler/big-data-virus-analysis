@@ -64,7 +64,15 @@ clusterNumber;labelType;{["apiName":size,"apiName":size,...]}
 
 #### Converting output.txt to JSON for D3 visualization
 
-Use `/exportJSON.php` to prepare the content of `/output.txt` to be visualized via D3. The script is set up to organize to satisfy the structure for the open source [Zoomable Circle Packing](https://bl.ocks.org/mbostock/7607535) cluster visualization.
+Use `/exportJSON.php` to prepare the content of `/output.txt` to be visualized via D3. The script is set up to organize the data in a way that satisfies the structure for the open source [Zoomable Circle Packing](https://bl.ocks.org/mbostock/7607535) cluster visualization. The details and examples can be found on the project's page.
+
+###### Why PHP?
+
+We used PHP in this case out of familiarity. Its sole purpose in this project is to convert the data into JSON as described above. The method and organization is [specific to the open source project we used](https://bl.ocks.org/mbostock/7607535) for visualization. The details may be found through the link. *There is no reason that you are required to use PHP to convert the data into JSON.* Using a different visualization package will likely require a different structure, so just use the language of your choice to make the organization / conversion.
+
+###### How do I run PHP?
+
+If you happen to be running Ubuntu, it's very easy to set up and run php scripts from the command line. Simply open a terminal window and type `sudo apt-get install apache2`. If you are using a different operating system, here are resources for [Windows](http://lmgtfy.com/?q=how+to+install+and+run+php+on+windows), [OS X](http://lmgtfy.com/?q=how+to+install+and+run+php+on+osx), and [more](http://lmgtfy.com/?q=how+to+install+and+run+php).
 
 ###### Example usage: `php exportJSON.php`
 
