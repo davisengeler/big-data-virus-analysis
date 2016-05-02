@@ -74,7 +74,7 @@ We used PHP in this case out of familiarity. Its sole purpose in this project is
 
 If you happen to be running Ubuntu, it's very easy to set up and run php scripts from the command line. Simply open a terminal window and type `sudo apt-get install apache2`. If you are using a different operating system, here are resources for [Windows](http://lmgtfy.com/?q=how+to+install+and+run+php+on+windows), [OS X](http://lmgtfy.com/?q=how+to+install+and+run+php+on+osx), and [more](http://lmgtfy.com/?q=how+to+install+and+run+php).
 
-###### Example usage: `php exportJSON.php`
+**Example usage:** `php exportJSON.php`
 
 ================
 
