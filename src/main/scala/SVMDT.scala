@@ -33,7 +33,14 @@ import org.apache.spark.mllib.tree.impurity.Entropy
 import org.apache.spark.mllib.tree.impurity.Impurity
 import org.apache.spark.mllib.tree.impurity.Gini
 
+import org.apache.log4j.{ Level, Logger }
+
+
 object driver {
+
+	Logger.getLogger("org").setLevel(Level.OFF)
+	Logger.getLogger("akka").setLevel(Level.OFF)
+
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("selectedintrusion").setMaster("local")
     val sc = new SparkContext(conf)

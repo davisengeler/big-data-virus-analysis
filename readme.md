@@ -82,12 +82,39 @@ If you happen to be running Ubuntu, it's very easy to set up and run php scripts
 
 #### Classification
 
-Determines the ROC curve and area under ROC curve (AUC) to predict the accuracy of the cluster classifcation. Sample output:
+Determines the ROC curve and Area Under ROC Curve (AUC) to predict the accuracy of the cluster classifcation. 
 
+Sample output from a source of 884 virus and 720 clean files using both the Decision Tree (DT) and Linear Support Vector Machines (SVM) classifcation models is determined as:
+
+# DT Entropy
 ```
-0.001 L2 regularization parameter, AUC = 74.761537%
-0.01 L2 regularization parameter, AUC = 72.390801%
-0.1 L2 regularization parameter, AUC = 69.726810%
-1.0 L2 regularization parameter, AUC = 64.863405%
-10.0 L2 regularization parameter, AUC = 50.239234%
+1 tree depth, AUC = 64.88%
+2 tree depth, AUC = 64.88%
+3 tree depth, AUC = 79.17%
+4 tree depth, AUC = 68.45%
+5 tree depth, AUC = 70.83%
+10 tree depth, AUC = 66.67%
+20 tree depth, AUC = 66.67%
 ```
+
+# DT Gini
+```
+1 tree depth, AUC = 64.88%
+2 tree depth, AUC = 64.88%
+3 tree depth, AUC = 77.38%
+4 tree depth, AUC = 73.21%
+5 tree depth, AUC = 75.60%
+10 tree depth, AUC = 71.43%
+20 tree depth, AUC = 71.43%
+```
+
+# CV SVM
+```
+0.001 L2 regularization parameter, AUC = 70.238095%
+0.01 L2 regularization parameter, AUC = 72.023810%
+0.1 L2 regularization parameter, AUC = 69.642857%
+1.0 L2 regularization parameter, AUC = 69.047619%
+10.0 L2 regularization parameter, AUC = 44.047619%
+```
+
+AUC is shown at different levels of tree depth and regularization parameters.
