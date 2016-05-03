@@ -86,7 +86,7 @@ Determines the ROC curve and Area Under ROC Curve (AUC) to predict the accuracy 
 
 Sample output from a source of 884 virus and 720 clean files using both the Decision Tree (DT) and Linear Support Vector Machines (SVM) classifcation models is determined as:
 
-# DT Entropy
+###### DT Entropy
 ```
 1 tree depth, AUC = 64.88%
 2 tree depth, AUC = 64.88%
@@ -97,7 +97,7 @@ Sample output from a source of 884 virus and 720 clean files using both the Deci
 20 tree depth, AUC = 66.67%
 ```
 
-# DT Gini
+###### DT Gini
 ```
 1 tree depth, AUC = 64.88%
 2 tree depth, AUC = 64.88%
@@ -108,7 +108,7 @@ Sample output from a source of 884 virus and 720 clean files using both the Deci
 20 tree depth, AUC = 71.43%
 ```
 
-# CV SVM
+###### CV SVM
 ```
 0.001 L2 regularization parameter, AUC = 70.238095%
 0.01 L2 regularization parameter, AUC = 72.023810%
